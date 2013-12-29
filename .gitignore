@@ -1,0 +1,4 @@
+vendor/
+*.pyc
+awards
+puzzles
