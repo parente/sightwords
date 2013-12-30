@@ -1,8 +1,9 @@
+/* jshint browser: true, devel: true */
+/* global $ */
 $(function() {
     var state = null;
     var puzzle_group;
     var target;
-    var solution;
     var $image = $('#image');
     var $text = $('#text');
     var $audio = $('#audio');
@@ -64,6 +65,8 @@ $(function() {
 
     var render_puzzle = function() {
         var puzzle = puzzle_group.puzzles.shift();
+
+        // no puzzles left, next step
         if(!puzzle) {
             state = null;
             step();
@@ -72,28 +75,26 @@ $(function() {
 
         // parse text into html and target list
         var html = '';
-        var in_keyword = false;
         var word_n = 0;
         target = [];
-        for(var i=0, l=puzzle.text.length; i<l; i++) {
-            var c = puzzle.text[i];
-            if(c === '*') {
-                if(in_keyword) {
-                    html += '</span>';
-                    ++word_n;
-                } else {
-                    html += '<span class="keyword" id="word_'+word_n+'">';
-                }
-                in_keyword = !in_keyword;
-            } else {
-                if(in_keyword) {
-                    target.push({cn: i, c: c.toLocaleLowerCase(), wn: word_n});
-                    html += '<span class="char" id="char_'+i+'">'+c+'</span>';
-                } else {
-                    html += c;
-                }
+        var match;
+        var last_start = 0;
+        var text = puzzle.text;
+        var rex = new RegExp('\\b'+puzzle_group.word+'\\b', 'gi');
+        while((match = rex.exec(text)) !== null) {
+            html += text.substring(last_start, match.index);
+            html += '<span class="keyword" id="word_'+word_n+'">';
+            for(var i=0, l=match[0].length; i<l; i++) {
+                var o = i + match.index;
+                var c = match[0][i];
+                html += '<span class="char" id="char_'+o+'">'+c+'</span>';
+                target.push({cn: o, c: c.toLocaleLowerCase(), wn: word_n});
             }
+            html += '</span>';
+            last_start = rex.lastIndex;
+            ++word_n;
         }
+        html += text.substr(last_start);
 
         // show information
         $image.attr('src', puzzle.image);

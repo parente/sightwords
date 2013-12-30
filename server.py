@@ -22,6 +22,7 @@ def puzzle_group(pid):
     with file(index_fn) as f:
         index = f.readlines()
     for i, text in enumerate(index):
+        if text.startswith('#'): continue
         base = os.path.join(path, str(i))
         audio = find_media(base, '.mp3', '.ogg')
         image = find_media(base, '.png', '.jpg', '.gif')
@@ -52,6 +53,7 @@ def random_puzzle():
     random.shuffle(group)
     return {
         'id': pid,
+        'word': pid,
         'puzzles': group
     }
 
