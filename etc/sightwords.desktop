@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Sightwords
+GenericName=Educational sightwords game
+Comment=Educational sightwords game
+Exec=/home/pi/sightwords/run.sh
+Icon=
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Education;
