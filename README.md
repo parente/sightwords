@@ -38,7 +38,7 @@ Run `run.sh` or put the `etc/sightwords.desktop` shortcut in `~/Desktop`.
 * Say the letters she types
 * Say the sightword when she gets it right
 * Give some kind of spoken reinforcement
-* Soeak hints about where the keys are on the US Keyboard
+* Speak hints about where the keys are on the US Keyboard
 * Tie it to Dropbox or whatever for other folks
 * Unterrible-ify the code
 
