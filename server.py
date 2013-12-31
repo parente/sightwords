@@ -3,9 +3,9 @@ import random
 from bottle import get, response, route, static_file, template, run
 
 PUZZLES_PATH = 'public/puzzles'
-AWARDS_PATH = 'public/awards'
-PUZZLES_URI = '/public/puzzles/%(id)s/%(fn)s'
-AWARDS_URI = '/public/puzzles/%(id)s/%(fn)s'
+ALL_PUZZLES = [name for name in os.listdir(PUZZLES_PATH) 
+    if not name.startswith('.') 
+    if os.path.isfile(os.path.join(PUZZLES_PATH, name, 'index.txt'))]
 
 def fn_to_uri(fn):
     return '/'+fn
@@ -47,8 +47,7 @@ def public(filename):
 
 @get('/puzzles/random')
 def random_puzzle():
-    fns = [name for name in os.listdir(PUZZLES_PATH) if not name.startswith('.')]
-    pid = random.choice(fns)
+    pid = random.choice(ALL_PUZZLES)
     group = puzzle_group(pid)
     random.shuffle(group)
     return {
@@ -56,10 +55,6 @@ def random_puzzle():
         'word': pid,
         'puzzles': group
     }
-
-@get('/awards/random')
-def random_award():
-    pass
 
 if __name__ == '__main__':
     if os.environ.get('BOTTLE_DEV'):

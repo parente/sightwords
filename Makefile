@@ -7,9 +7,6 @@ clean:
 public/puzzles:
 	@-ln -s ~/Dropbox/bubba\ and\ chewy/sightwords/puzzles public/puzzles
 
-public/awards:
-	@-ln -s ~/Dropbox/bubba\ and\ chewy/sightwords/awards public/awards
-
 vendor: front-vendor back-vendor
 
 front-vendor:
@@ -22,10 +19,11 @@ back-vendor:
 	@virtualenv --no-site-packages vendor
 	@vendor/bin/pip install bottle==0.11.6
 
-dev: public/puzzles public/awards
+dev: public/puzzles
 	@BOTTLE_DEV=1 vendor/bin/python server.py
 
-server: public/puzzles public/awards
+server:
 	@vendor/bin/python server.py
 
 upload:
+	@rsync -avz --copy-dirlinks --exclude .DS_Store --exclude /vendor --exclude .git . pi:sightwords
