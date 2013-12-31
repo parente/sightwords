@@ -2,6 +2,8 @@
 
 Simple browser-based HTML5 sightword, reading, and typing tutor for my daughter's Raspberry Pi.
 
+![The TARDIS is blue.](http://i.imgur.com/xSQWN5p.png)
+
 ## Running
 
 Run `run.sh` or put the `etc/sightwords.desktop` shortcut in `~/Desktop`.
@@ -38,3 +40,8 @@ Run `run.sh` or put the `etc/sightwords.desktop` shortcut in `~/Desktop`.
 * Give some kind of spoken reinforcement
 * Soeak hints about where the keys are on the US Keyboard
 * Tie it to Dropbox or whatever for other folks
+* Unterrible-ify the code
+
+## Attribution
+
+TARDIS is a registered trademark of [You Know Who](http://www.bbc.co.uk/programmes/b006q2x0).
